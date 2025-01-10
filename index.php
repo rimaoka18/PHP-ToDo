@@ -1,5 +1,6 @@
 <?php
 require_once('functions.php');
+header('Set-Cookie: userId=123');
 ?>
 
 <!DOCTYPE html>
