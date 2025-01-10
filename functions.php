@@ -41,12 +41,13 @@ function getSelectedTodo($id)
 function savePostedData($post)
 {
   checkToken($post['token']);
+  validate($post);
   $path = getRefererPath();
   switch ($path) {
     case '/new.php':
       createTodoData($post['content']);
       break;
-    case '/edit.php':
+   case '/edit.php':
       updateTodoData($post);
       break;
     case '/index.php':
@@ -55,6 +56,13 @@ function savePostedData($post)
     default:
       break;
   }
+}
+function validate($post)
+{
+    if (isset($post['content']) && $post['content'] === '') {
+        $_SESSION['err'] = '入力がありません';
+        redirectToPostedPage();
+    }
 }
 
 function getRefererPath()
